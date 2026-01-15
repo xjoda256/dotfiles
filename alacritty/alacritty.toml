@@ -1,0 +1,2 @@
+[general]
+import = ["/home/joda/.cache/wal/colors-alacritty.toml"]
