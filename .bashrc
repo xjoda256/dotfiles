@@ -1,64 +1,65 @@
-############
-# .bashrc ##
-############
+###############
+## ~/.bashrc ##
+## ×Joda™ #####
+###############
 
-## My super 1337 and sexy prompt
-#PS1='\n\e[4;97m\]$(line)\[$(reset)\]\e[1;31m\] \h \[\e[m\]\[\e[1;34m\]\w \[\e[m\]\n\[\e[1;97m\] 󰜴 '
-PS1='\n\e[1;93m\] \u\e[1;94m\]@\e[1;95m\]\h \[\e[m\]\[\e[1;34m\]\W\[\e[m\]\n\[\e[1;92m\]  \[\e[1;97m\]'
+## super 1337 prompt ##
+PS1='\n\e[0;97m╭───\e[0;35m\] @\e[0;96m\]\h \[\e[m\]\[\e[1;34m\]\w\[\e[m\]\n\[\e[0;97m\]╰─ \[\e[0;97m\]'
 
-line()
-{
-    printf "%*s" $COLUMNS ""
-}
-reset()
-{
-	tput sgr0
-}
+## line drawing characters ╭ ─ ╮ ╰ ─ ╯ ┌ ┐ ┴ ┬ └ ┘ │    ##
 
-#PS1='\e[4;97m\]$(line)\[$(reset)\]\n \e[1;94m\]\h \e[1;94m\]\w \n \e[1;97m\] \$ '
-
-
-#PS1='[\e[1;90m\]\h \]\[\e[1;95m\]\w \] \n[\e[1;95m\]> \[\e[1;97m\]\] '
-
-## Aliases
-#alias rm='rm -i'
+## aliases ##
 alias mv='mv -i'
-alias ls='ls --color=auto'
-alias la='ls -A'
-alias ll='ls -l'
+alias ls='eza --group-directories-first'
+alias la='eza -a --group-directories-first'
+alias ll='eza -l --group-directories-first'
+alias cd='z'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
-alias wttrin='curl -s wttr.in/35453 | head -n 7'
-alias kdec1p='kdeconnect-cli -n OnePlus'
-## add --accept= to only download certain filetypes 
-alias wgetod='wget -e robots=off -r -nc -np --show-progress' 
+## add --accept= to only download certain filetypes ##
+alias wgetod='wget -e robots=off -r -nc -np --show-progress'
+alias nvhy='nvim ~/.config/hypr/hyprland.conf'
+alias nviminit='nvim ~/.config/nvim/init.lua'
+alias clear='clear; source ~/.bashrc '
 
-## SSH aliases
-alias sshpi='ssh pi@192.168.0.101'
-
-## Source global definitions
+## source global definitions ##
 if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
-## Enable programmable completion features ## copied from mint's default bashrc
+## enable programmable completion features ##
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+	if [ -f /usr/share/bash-completion/bash_completion ]; then
+		. /usr/share/bash-completion/bash_completion
+	elif [ -f /etc/bash_completion ]; then
+		. /etc/bash_completion
+	fi
 fi
 
-## Adding ~/.local/bin to $PATH
+## adding ~/.local/bin to $PATH ##
 export PATH=$PATH:~/.local/bin/
 
-## Autostart tmux ##<I don't know what any of this means. I copy/pasted from somewhere YEARS ago.>
-# If not running interactively, do not do anything
+## autostart tmux if in interactive shell ##
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
 
+## zoxide is aliased to cd above ##
+eval "$(zoxide init bash --cmd z)" 
 
+## mkdir then cd into it ##
+mkcd () {
+  mkdir -p -- "$1" && cd -P -- "$1"
+}
 
+## make a .bak copy ##
+bak () {
+	mv $1 $1.bak
+}
+
+## very improtant thing to make your computer run faster ##
+echo
+printf "\e[0;97m i use \e[1;34march™\e[0;97m btw"
+echo
+echo
+fastfetch -c ~/.config/fastfetch/Blocks.jsonc
+echo
 
