@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+##################
+#                #
+#  Flip a coin!  #
+#                #
+##################
+
+shuf -n1 -e "heads" "tails" |tee >(xargs -r0 -n1 notify-send "Your coin landed on: ")
+
